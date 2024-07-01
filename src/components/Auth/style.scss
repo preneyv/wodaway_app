@@ -1,0 +1,96 @@
+.choose_form, .auth_form, .auth_validation{
+  background-color: var(--color-grey);
+  border-radius: var(--radius);
+  width: auto;
+  padding: 1.5rem;
+  @include flex(column);
+  font-family: var(--typo-text);
+}
+
+.wodaway_logo{
+  width: 300px;
+}
+
+.auth_form_hr, , .auth_validation_hr{
+  width: 80%;
+  background-color: var(--color-text-primary);
+  height: 1px;
+  margin: 1rem 0;;
+}
+
+.title{
+  color: var(--color-text-primary)
+}
+
+.auth_form_main, .choose_form_main, .auth_validation_main{
+  width: 100%;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+.auth_validation_main{
+  @include flex(column)
+}
+
+.auth_validation_main > .confirm{
+  margin-top: 2rem;
+}
+
+.auth_form_main > form {
+  width: 100%;
+  @include flex(column);
+  gap : 1.5rem
+}
+
+.auth_form_main > form > *{
+  width: 100%;
+}
+
+.choose_form_bottom, .auth_form_bottom{
+  margin-top: 1rem;
+  color: var(--color-text-primary)
+}
+
+.group_form_elts{
+  @include flex(row, center, undefined);
+  gap: 1rem;
+}
+
+//Choose form page
+
+.choose_form_main{
+  @include flex();
+  gap: 1rem;
+}
+
+.choose_form_main > .item {
+  width: fit-content;
+  padding: 1rem 2rem;
+  border-radius: var(--radius);
+  @include flex(column);
+  gap: 0.5rem;
+  font-size: 1rem;
+  color : var(--color-text-primary)
+}
+
+.choose_form_main > .item:hover{
+  outline: 1px solid var(--color-yellow);
+  cursor: pointer;
+  transition: opacity 0s ease-out 0.29s, width 0.15s ease-out 0.3s;
+}
+
+.choose_form_main > .item > div {
+  width: 80px;
+  height: 80px;
+  @include flex()
+}
+
+.wodaway_athlete {
+  width: 60px;
+  height: auto;
+}
+
+.wodaway_box {
+  width: 50px;
+  height: auto;
+}

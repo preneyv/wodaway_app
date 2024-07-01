@@ -1,0 +1,54 @@
+@mixin flex(
+  $direction: row,
+  $justify: center,
+  $align: center,
+  $wrap: nowrap,
+  $type: flex
+) {
+  display: $type;
+  flex-direction: $direction;
+  justify-content: $justify;
+  align-items: $align;
+  flex-wrap: $wrap;
+}
+
+@mixin heading() {
+  $j: 4;
+  $multiplier: 1.22;
+  @for $i from 1 through $j {
+    .h-#{$j} {
+      font: calc(
+					var(--font-base) * (#{$i} * #{$multiplier})
+				) /#{$multiplier}
+      var(--typo-title);
+    }
+    $j: $j - 1;
+  }
+}
+@mixin gap($i, $gap: both) {
+  @if $gap == col {
+    gap-col: space($i);
+  } @else if $gap == row {
+    gap-row: space($i);
+  } @else {
+    gap: space($i);
+  }
+}
+@mixin responsive($breakpoint) {
+  @if map-has-key($breakpoints, $breakpoint) {
+    @media #{inspect(map-get($breakpoints, $breakpoint))} {
+      @content;
+    }
+  } @else {
+    @warn "Unfortunately, no value could be retrieved from `#{$breakpoint}`. "
+		+ "Available breakpoints are: #{map-keys($breakpoints)}.";
+  }
+}
+
+@mixin btnStyle($radius, $rl-pad, $tb-pad) {
+  @include flex(row, center, center);
+  background-color: var(--color-primary);
+  border-radius: space($radius);
+  color: var(--color-black);
+  padding: space($tb-pad) space($rl-pad);
+}

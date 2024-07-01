@@ -1,0 +1,23 @@
+.wodaway_submit_button, .wodaway_button{
+
+  background-color: var(--color-yellow);
+  width: 100%;
+  color: var(--color-black);
+  border-radius: var(--radius);
+  padding: var(--form-padding);
+  font-weight: var(--weight);
+  box-shadow: var(--btn-shadow);
+  @include flex();
+  gap: 0.3rem
+}
+
+.wodaway_submit_button:hover, .wodaway_button:hover{
+  background-color: var(--btn-hover)
+}
+.wodaway_submit_button:active, .wodaway_button:active{
+  background-color: var(--btn-active)
+}
+
+.wodaway_button{
+  margin-top: var(--margin-top);
+}

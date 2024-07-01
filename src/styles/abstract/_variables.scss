@@ -1,0 +1,67 @@
+$fontBase: 12px;
+$space: 0.25rem;
+$radius: 0.25rem;
+$weight : 600;
+$colors: (
+        "black": black,
+        "grey": #323539,
+        "text-primary": #7F8488,
+        "text-secondary": white,
+        "yellow": #FFD37D,
+        "error" : #fc3e3e,
+);
+$margins: (
+        "top": 2rem,
+        "left": 2rem,
+        "right": 2rem,
+        "bottom": 2rem,
+);
+$btn-hover : #f8d696;
+$btn-active : #f8bf51;
+$label-margin-bottom : 5px;
+$form-padding: 0.7rem;
+$form-padding-field: 0.5rem;
+$btn-primary-shadow : 0 2px 0 rgba(5, 145, 255, 0.1);
+$typoTitle: "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI",
+Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+$typoText: "Noto Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+$breakpoints: (
+        "tablet": (
+                min-width: 767px,
+        ),
+        "laptop": (
+                min-width: 992px,
+        ),
+        "desktop": (
+                min-width: 1200px,
+        ),
+        "xl-desktop": (
+                min-width: 1500px,
+        ),
+        "large": (
+                min-width: 1920px,
+        ),
+) !default;
+
+// Convert SCSS variable to CSS variable to easily calculate values
+:root {
+  @each $margin, $value in $margins {
+    --margin-#{$margin}: #{$value};
+  }
+  @each $color, $value in $colors {
+    --color-#{$color}: #{$value};
+  }
+  --space: #{$space};
+  --font-base: #{$fontBase};
+  --typo-title: #{$typoTitle};
+  --typo-text: #{$typoText};
+  --radius: #{$radius};
+  --btn-shadow: #{$btn-primary-shadow};
+  --btn-hover: #{$btn-hover};
+  --btn-active: #{$btn-active};
+  --weight : #{$weight};
+  --form-padding : #{$form-padding};
+  --form-padding-field : #{$form-padding-field};
+  --form-label-margin-bottom : #{$label-margin-bottom}
+}

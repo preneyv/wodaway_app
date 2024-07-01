@@ -1,0 +1,11 @@
+@function space($i) {
+  @return calc(#{$i} * var(--space));
+}
+
+@function width($w) {
+  @return calc(100% * (#{$w} / 12));
+}
+
+@function changeOpacity($color, $alpha) {
+  @return rgba($color, $alpha);
+}

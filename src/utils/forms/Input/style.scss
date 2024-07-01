@@ -1,0 +1,19 @@
+.wodaway_input{
+  width: 100%;
+}
+.wodaway_input > input{
+  background-color: var(--color-text-primary);
+  border-radius: var(--radius);
+  padding: var(--form-padding);
+  border: none;
+  font-size: 0.8rem;
+}
+
+.wodaway_input > input:focus-visible{
+  border: none;
+}
+
+.form_field_required{
+  color: #fc3e3e;
+  margin-right: 5px;
+}
