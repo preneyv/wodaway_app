@@ -34,6 +34,8 @@ export type T_Validation = {
     uuid: string
 }
 
+
+
 export type T_Validation_Response = {
     token : {
         is_validated : boolean,

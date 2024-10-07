@@ -1,6 +1,8 @@
 import {Navigate, Outlet} from "react-router-dom";
 import Loader from "../../components/Loader";
-import useAuthenticated from "../../hooks/useAuthenticated.tsx";
+import useAuthenticated from "../../utils/hooks/useAuthenticated.tsx";
+import Menu from "../../components/Menu";
+import "./style.scss"
 
 
 function AuthenticatedLayout(){
@@ -11,7 +13,11 @@ function AuthenticatedLayout(){
         return <Loader />
 
     return isAuthenticated ?
-        <Outlet /> :
+
+        <div className="protected_pages_display">
+            <Menu />
+            <div className="content"><Outlet /></div>
+        </div> :
         <Navigate to="/auth/sign-in" />
 }
 

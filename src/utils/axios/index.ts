@@ -14,7 +14,10 @@ import {
 } from "./auth";
 import {T_Athlete, T_Box, T_User, T_Validation} from "../../types/auth.ts";
 import {T_Generic_Response} from "../../types/generic.ts";
-import {Bounce, toast} from "react-toastify";
+import {toast} from "react-toastify";
+import locals from "../../locals";
+import {getLocalState} from "../context/LanguageContext.tsx";
+import {checkSIREN, checkSIRET} from "./apis";
 
 const getToken = () => {
     return localStorage.getItem('token');
@@ -34,10 +37,16 @@ const dispatcher:T_DispatcherAxios = {
     'auth/SIGN_UP_VALIDATION' : (opts: IGlobalCallApi<T_Validation>) => checkSignUpValidation(opts),
     'auth/SIGN_UP_CONFIRM_VALIDATION': (opts : IGlobalCallApi<T_Validation>) => confirmSignUpValidation(opts),
     'auth/SIGN_IN' : (opts : IGlobalCallApi<T_User>) => signIn(opts),
-    'auth/CHECK_AUTHENTICATION' : () => isAuthenticated()
+    'auth/CHECK_AUTHENTICATION' : () => isAuthenticated(),
+    'apis/CHECK_SIREN': (opts: IGlobalCallApi<{SIREN: string}>) => checkSIREN(opts),
+    'apis/CHECK_SIRET': (opts: IGlobalCallApi<{SIRET: string}>) => checkSIRET(opts)
 }
 
-apiClient.interceptors.response.use(undefined, (error) => {
+apiClient.interceptors.response.use((response) => {
+
+    statusResponseHandler({status: response.status, data: {message:response.data.message as string}})
+    return response
+}, (error) => {
     console.log("erreur", error)
     // Errors handling
     const { response } = error
@@ -50,37 +59,10 @@ function statusResponseHandler(response: { status: number, data: T_Generic_Respo
         case 450 : window.location.href = "/404"
             break;
         case 510 :
-            console.log("notif", response.data.message);
-            toast.error(
-                response.data.description,
-                {
-                    position: "top-right",
-                    autoClose: 5000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
-                    theme: "light",
-                    transition: Bounce,
-                }
-            )
+            toast.error(locals[getLocalState()][response.data.message])
             break;
         case 210 :
-            toast.success(
-                response.data.description,
-                {
-                    position: "top-right",
-                    autoClose: 5000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
-                    theme: "light",
-                    transition: Bounce,
-                }
-            )
+            toast.success(locals[getLocalState()][response.data.message])
             break;
         case 500:
             return response
@@ -97,8 +79,10 @@ export async function globalCallApi<T,R>(opts: IGlobalCallApi<T>): Promise<R | u
     try{
         const signatureMethod = dispatcher[opts.method] as DispatcherFunction<T,R>
         const response =  await signatureMethod(opts)
+
         console.log(response)
-        return response.data
+        if(response && response.data)
+            return response.data
 
     }catch (e) {
        console.log(e)

@@ -1,8 +1,9 @@
+import HomeComp from "../../components/Home/HomeComp.tsx";
 
 
 function Home(){
 
-    return "Home"
+    return <HomeComp />
 }
 
 export default Home

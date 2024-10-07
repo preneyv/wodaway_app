@@ -1,5 +1,5 @@
 import SignInForm from "../../components/Auth/SignInForm.tsx";
-import useAuthenticated from "../../hooks/useAuthenticated.tsx";
+import useAuthenticated from "../../utils/hooks/useAuthenticated.tsx";
 import {Navigate} from "react-router-dom";
 
 

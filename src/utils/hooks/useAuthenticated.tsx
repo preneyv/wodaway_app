@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
-import {globalCallApi} from "../utils/axios";
-import { T_Check_Authentication} from "../types/auth.ts";
+import {globalCallApi} from "../axios";
+import { T_Check_Authentication} from "../../types/auth.ts";
 import {useNavigate} from "react-router-dom";
 
 const useAuthenticated = () => {

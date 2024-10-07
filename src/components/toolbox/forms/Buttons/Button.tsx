@@ -9,7 +9,7 @@ type ButtonProps = {
     loading : boolean,
     onclickMethod : MouseEventHandler<HTMLButtonElement> | undefined
 }
-function Submit({text, name, loading, onclickMethod} : ButtonProps){
+function Button({text, name, loading, onclickMethod} : ButtonProps){
 
     return (
         <button name={name} className="wodaway_button" type="button" onClick={onclickMethod}>
@@ -18,4 +18,4 @@ function Submit({text, name, loading, onclickMethod} : ButtonProps){
     )
 }
 
-export default Submit
+export default Button

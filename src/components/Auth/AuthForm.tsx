@@ -1,21 +1,23 @@
 import "./style.scss"
 import {FieldValues, FormProvider, SubmitHandler, useForm} from "react-hook-form";
-import Submit from "../../utils/forms/Buttons/Submit.tsx";
-import {Link} from "react-router-dom";
 import React from "react";
+import {useLanguageStore} from "../../utils/context/LanguageContext.tsx";
+import locals from "../../locals";
+import Submit from "../toolbox/forms/Buttons/Submit.tsx";
 
 type AuthFormProps<T extends FieldValues> = {
-    typeForm : string,
     titleForm : string,
     children : React.ReactNode[],
     handleSubmit: SubmitHandler<T>,
-    loading : boolean
+    loading : boolean,
+    bottomLink: React.ReactNode
 }
 
 
-function AuthForm<T extends FieldValues>({titleForm, typeForm, children, handleSubmit, loading} : AuthFormProps<T>){
+function AuthForm<T extends FieldValues>({titleForm, children, handleSubmit, loading, bottomLink} : AuthFormProps<T>){
 
     const methods = useForm<T>()
+    const {language} = useLanguageStore()
 
     return (
         <div className="auth_form">
@@ -28,16 +30,14 @@ function AuthForm<T extends FieldValues>({titleForm, typeForm, children, handleS
                         {
                             ...children
                         }
-                        <Submit text="Valider" name="submit" loading={loading} />
+                        <Submit text={locals[language]["auth.form.submit"]} name="submit" loading={loading} />
                     </form>
                 </FormProvider>
 
             </div>
             <div className="auth_form_bottom">
                 {
-                    typeForm === "sign-in" ?
-                        <Link to="/auth/sign-up">Vous n'avez pas de compte ? Créez en un !</Link> :
-                        <Link to="/auth/sign-in">Vous avez déjà un compte ? Se connecter</Link>
+                    bottomLink
                 }
             </div>
         </div>
